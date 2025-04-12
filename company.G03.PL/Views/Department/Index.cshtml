@@ -1,0 +1,64 @@
+﻿
+@model IEnumerable<DepatmentDTO>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div aria-live="polite" aria-atomic="true" class="toast-container position-fixed p-3" style="bottom: 25px; right:25px; z-index: 100;">
+    <div class="toast fade show " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto text-success">Success!!</strong>
+            <small>Just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            @TempData["Message"]
+        </div>
+    </div>
+</div>
+
+
+<div class="alert alert-info">
+    <h2>Welcome to Departments Management System</h2>
+    <p>Here you can manage all your Departments.</p>
+
+<a class="btn btn-primary my-3" asp-controller="Department" asp-action="Create">Create New Department</a>
+
+@if (Model.Any())
+{
+    <table class="table table-striped table-hover mt-2">
+        <thead class="text-center">
+            <tr>
+                <th>@Html.DisplayNameFor(D=>D.code)</th>
+                <th>@Html.DisplayNameFor(D => D.Name)</th>
+                <th>@Html.DisplayNameFor(D=>D.Description)</th>
+                <th>@Html.DisplayNameFor(D => D.DateOfCreation)</th>
+                <th>>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach(var Department in Model)
+            {
+                <tr>
+                    <td>@Department.code</td>
+                    <td>@Department.Name</td>
+                    <td>@Department.Description</td>
+                    <td>@Department.DateOfCreation</td>
+                    <partial name="_BottonsPartialView" model="@Department.ID" />
+                    <td><a asp-controller="Department" asp-action="Delete" class="btn btn-danger" asp-route-id="@Department.ID"><i class="fa-solid fa-trash"></i> Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info py-2">
+        <h2>No Departments Found !!</h2>
+
+    </div>
+}
+</div>
+
