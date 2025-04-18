@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace company.G3.BLL.DTO.Empeloyee
 {
@@ -25,5 +26,7 @@ namespace company.G3.BLL.DTO.Empeloyee
         public DateTime LastModifiedOn { get; set; }
         public string? Department { get; set; }
         public int Departmentid { get; set; }
+        public string? ImageName { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

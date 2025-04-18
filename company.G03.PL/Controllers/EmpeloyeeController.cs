@@ -39,14 +39,14 @@ namespace company.G03.PL.Controllers
                 DepartmentId = Employee.DepartmentId,
                 EmployeeType = Employee.EmployeeType,
                 Gender = Employee.Gender,
-                HiringDate = Employee.HiringDate
-
+                HiringDate = Employee.HiringDate,
+                Image = Employee.Image,
             };
             try
             {
                 
                 var result = _empeloyeeService.Add(createdEmployee);
-                string message = string.Empty;
+                string message ;
                 if (result > 0)
                 {
                     message = $"Employee {createdEmployee.Name} added successfully.";
@@ -82,7 +82,7 @@ namespace company.G03.PL.Controllers
             return View(empelyee);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit([FromRoute] int? id)
         {
             var empeloyee = _empeloyeeService.GetById(id.Value);
             if (empeloyee is null) return NotFound();
@@ -99,22 +99,27 @@ namespace company.G03.PL.Controllers
            Gender=Enum.Parse<Gender>( empeloyee.Gender),
            EmployeeType=Enum.Parse<EmpeloyeeType>(empeloyee.EmployeeType),
                DepartmentId = empeloyee.Departmentid,
+               Image = empeloyee.Image,
+               ImageName = empeloyee.ImageName
+               
 
            };
             return View(empeloyeeDto);
         }
         [HttpPost]
-        
-        public IActionResult Edit([FromRoute] int? id,EmployeeModelView employeeModelView)
+
+        public IActionResult Edit([FromRoute] int? id,[FromForm] EmployeeModelView employeeModelView)
         {
             if(!id.HasValue) return BadRequest();
             if (ModelState.IsValid)
             {
                 try
                 {
+
+
                     var employeeDto = new UpdatedEmployeeDto()
                     {
-                        Id=employeeModelView.Id,
+                        Id = id.Value,
                         Name = employeeModelView.Name,
                         Salary = employeeModelView.Salary,
                         Address = employeeModelView.Address,
@@ -123,11 +128,16 @@ namespace company.G03.PL.Controllers
                         PhoneNumber = employeeModelView.PhoneNumber,
                         IsActive = employeeModelView.IsActive,
                         EmployeeType = employeeModelView.EmployeeType,
-                        DepartmentId= employeeModelView.DepartmentId,
+                        DepartmentId = employeeModelView.DepartmentId,
                         HiringDate = employeeModelView.HiringDate,
                         Gender = employeeModelView.Gender,
+                        Image = employeeModelView.Image,
+                        ImageName = employeeModelView.ImageName,
+                        
 
                     };
+                    
+                   
                     var result = _empeloyeeService.Update(employeeDto);
                     string message = string.Empty;
                     if (result > 0)

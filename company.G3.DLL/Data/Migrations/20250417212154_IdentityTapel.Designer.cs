@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using company.G3.DLL.Data.contexts;
 
@@ -11,9 +12,11 @@ using company.G3.DLL.Data.contexts;
 namespace company.G3.DLL.Data.Migrations
 {
     [DbContext(typeof(CombanyDbContext))]
-    partial class CombanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250417212154_IdentityTapel")]
+    partial class IdentityTapel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

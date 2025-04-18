@@ -31,5 +31,7 @@ namespace company.G03.PL.Models.Employee
         public EmpeloyeeType EmployeeType { get; set; }
         [Display(Name = "Department")]
         public int? DepartmentId { get; set; }
+        public string? ImageName { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }
