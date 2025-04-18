@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace company.G3.BLL.DTO.Empeloyee
 {
@@ -22,5 +23,8 @@ namespace company.G3.BLL.DTO.Empeloyee
         [Display(Name = "Employee Type")]
         public string EmployeeType { get; set; }
         public string Department { get; set; }
+        public string? ImageName { get; set; }
+
+        public IFormFile? Image { get; set; }
     }
 }

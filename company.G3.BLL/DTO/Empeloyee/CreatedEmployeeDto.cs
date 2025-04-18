@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using company.G3.DLL.Models.empeloyeeModel;
 using company.G3.DLL.Models.Shered;
+using Microsoft.AspNetCore.Http;
 
 namespace company.G3.BLL.DTO.Empeloyee
 {
@@ -35,5 +36,7 @@ namespace company.G3.BLL.DTO.Empeloyee
         public EmpeloyeeType EmployeeType { get; set; }
 
         public int? DepartmentId { get; set; }
+
+        public IFormFile?  Image { get; set;}
     }
 }
