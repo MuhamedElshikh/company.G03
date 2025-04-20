@@ -30,7 +30,7 @@ namespace company.G3.DLL.Repositories.@class
         {
             return _dbContext.Set<TEntity>().Where(e => e.IsDeleted != true).Select(Selector).ToList();
         }
-        public TEntity? GetById(int id)
+        public TEntity GetById(int id)
         {
 
             return _dbContext.Set<TEntity>().Find(id);

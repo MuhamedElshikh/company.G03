@@ -1,0 +1,46 @@
+﻿.bg-gradient-primary {
+    background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+}
+
+.card {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+    .form-control:focus, .form-select:focus {
+        box-shadow: 0 0 0 0.25rem rgba(58, 123, 213, 0.15);
+        border-color: #3a7bd5;
+    }
+
+.btn {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #3a7bd5;
+    border-color: #3a7bd5;
+}
+
+.btn-outline-secondary {
+    border-width: 2px;
+}
+
+.rounded-3 {
+    border-radius: 16px !important;
+}
+
+.form-floating label {
+    padding-left: 2.5rem;
+}
+
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-control:focus ~ label {
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    opacity: 0.8;
+}

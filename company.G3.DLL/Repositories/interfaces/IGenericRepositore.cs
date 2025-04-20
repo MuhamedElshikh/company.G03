@@ -15,7 +15,7 @@ namespace company.G3.DLL.Repositories.interfaces
         IEnumerable<TEntity> GetAll(bool WithTracking = false);
         IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> Selector);
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate);
-        TEntity? GetById(int id);
+        TEntity GetById(int id);
         void remove(TEntity Entity);     
         void ubdate(TEntity Entity);
     }

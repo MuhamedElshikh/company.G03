@@ -1,0 +1,16 @@
+﻿
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.card {
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 2px 2px 5px #00ffff ;
+}
+
+.btn-group .btn {
+    border-radius: 0.25rem !important;
+}
+
+

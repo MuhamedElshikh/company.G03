@@ -5,86 +5,230 @@
 @inject IDepartmentService _departmentService
 @model EmployeeModelView
 @{
-
-        var departments = new SelectList(_departmentService.GetAllDepatment(), nameof(DepatmentDTO.ID), nameof(DepatmentDTO.Name));  
+    var departments = new SelectList(_departmentService.GetAllDepatment(), nameof(DepatmentDTO.ID), nameof(DepatmentDTO.Name));
 }
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="Name"></label>
-    <input asp-for="Name" class="form-control" />
-    <span asp-validation-for="Name" class="text-danger"></span>
-</div>
-<div class="form-group mb-3 col-6 d-flex gap-2">
-    
-        
-    <div class=" ">
-        @if (Model != null && !string.IsNullOrEmpty(Model.ImageName))
-        {
-            <img class="rounded-circle img-fluid " src="~/files/images/@Model.ImageName" alt="Alternate Text"
-                 style="max-width:70px ; max-height:70px ;aspect-ratio:1/1;" />
-        }
-      
+
+<div class="container-fluid px-4 py-4">
+    <div class="card border-0 shadow-lg rounded-3 overflow-hidden">
+        <div class="card-header bg-primary text-white py-3">
+            <h2 class="h5 mb-0">
+                <i class="fas fa-user-edit me-2"></i>Employee Information
+            </h2>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="row g-4">
+                <!-- Name Field -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Name" class="form-control" placeholder=" " />
+                        <label asp-for="Name" class="form-label"></label>
+                        <span asp-validation-for="Name" class="text-danger small mt-1 d-block"></span>
+                    </div>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-upload-preview">
+                            @if (Model != null && !string.IsNullOrEmpty(Model.ImageName))
+                            {
+                                <img class="rounded-circle shadow-sm"
+                                     src="~/files/images/@Model.ImageName"
+                                     alt="Employee Photo"
+                                     width="80"
+                                     height="80"
+                                     style="object-fit: cover" />
+                            }
+                            else
+                            {
+                                <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-user text-muted fs-4"></i>
+                                </div>
+                            }
+                        </div>
+                        <div class="flex-grow-1">
+                            <label class="form-label">Profile Photo</label>
+                            <input asp-for="Image" class="form-control" />
+                            <input asp-for="ImageName" hidden readonly />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Email" class="form-control" placeholder=" " />
+                        <label asp-for="Email" class="form-label"></label>
+                        <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
+                    </div>
+                </div>
+
+                <!-- Address Field -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Address" class="form-control" placeholder=" " />
+                        <label asp-for="Address" class="form-label"></label>
+                        <span asp-validation-for="Address" class="text-danger small mt-1 d-block"></span>
+                    </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="PhoneNumber" class="form-control" placeholder=" " />
+                        <label asp-for="PhoneNumber" class="form-label"></label>
+                        <span asp-validation-for="PhoneNumber" class="text-danger small mt-1 d-block"></span>
+                    </div>
+                </div>
+
+                <!-- Age Field -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Age" class="form-control" placeholder=" " />
+                        <label asp-for="Age" class="form-label"></label>
+                        <span asp-validation-for="Age" class="text-danger small mt-1 d-block"></span>
+                    </div>
+                </div>
+
+                <!-- Hiring Date -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" asp-for="HiringDate" class="form-control" placeholder=" " />
+                        <label asp-for="HiringDate" class="form-label"></label>
+                        <span asp-validation-for="HiringDate" class="text-danger small mt-1 d-block"></span>
+                    </div>
+                </div>
+
+                <!-- Salary Field -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Salary" class="form-control" placeholder=" " />
+                        <label asp-for="Salary" class="form-label"></label>
+                        <span asp-validation-for="Salary" class="text-danger small mt-1 d-block"></span>
+                    </div>
+                </div>
+
+                <!-- Department Dropdown -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-select" asp-for="DepartmentId" asp-items="departments">
+                            <option value="">Select Department</option>
+                        </select>
+                        <label asp-for="DepartmentId" class="form-label"></label>
+                    </div>
+                </div>
+
+                <!-- Employee Type -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-select" asp-for="EmployeeType" asp-items="Html.GetEnumSelectList<EmpeloyeeType>()">
+                            <option value="">Select Type</option>
+                        </select>
+                        <label asp-for="EmployeeType" class="form-label"></label>
+                    </div>
+                </div>
+
+                <!-- Gender Radio Buttons -->
+                <div class="col-md-6">
+                    <label class="form-label mb-2">Gender</label>
+                    <div class="d-flex gap-4">
+                        @foreach (var genderOption in Enum.GetValues<Gender>())
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Gender" value="@genderOption" id="gender-@genderOption" />
+                                <label class="form-check-label" for="gender-@genderOption">
+                                    @genderOption
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Active Status -->
+                <div class="col-md-6">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" asp-for="IsActive" />
+                        <label class="form-check-label mx-1" asp-for="IsActive"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-        <div class=" align-content-center w-100">
-            <input asp-for="Image" class="form-control " />
-        <input asp-for="ImageName" class="form-control " hidden readonly />
+</div>
 
-        </div>
-    
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="Email"></label>
-    <input asp-for="Email" class="form-control" />
-    <span asp-validation-for="Email" class="text-danger"></span>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="Address"></label>
-    <input asp-for="Address" class="form-control" />
-    <span asp-validation-for="Address" class="text-danger"></span>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="PhoneNumber"></label>
-    <input asp-for="PhoneNumber" class="form-control" />
-    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="Age"></label>
-    <input asp-for="Age" class="form-control" />
-    <span asp-validation-for="Age" class="text-danger"></span>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="HiringDate"></label>
-    <input type="date" asp-for="HiringDate" class="form-control" />
-    <span asp-validation-for="HiringDate" class="text-danger"></span>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="Salary"></label>
-    <input asp-for="Salary" class="form-control" />
-    <span asp-validation-for="Salary" class="text-danger"></span>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="DepartmentId"></label>
-    <select class="form-control" asp-for="DepartmentId" asp-items="departments">
-        <option value="@null">Choose Department</option>
-    </select>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label" asp-for="EmployeeType"></label>
-    <select class="form-control" asp-for="EmployeeType" asp-items="Html.GetEnumSelectList<EmpeloyeeType>()">
-        <option value="">Select Employee Type</option>
-    </select>
-</div>
-<div class="form-group mb-3 col-6">
-    <label class="form-label my-2" asp-for="Gender"></label>
-
-    @foreach (var genderopation in Enum.GetValues<Gender>())
-    {
-        <div class=" form-check-inline ">
-            <input class=" form-check-inline m-0" type="radio" asp-for="Gender" value="@genderopation" />
-            <label class="form-check-label ">@genderopation</label>
-        </div>
+<style>
+    /* Form Styling */
+    .form-floating label {
+        color: #6c757d;
     }
-</div>
-<div class="form-group mb-3 col-6">
-    <input asp-for="IsActive" class="form-check-input" />
-    <label class="col-form-label" asp-for="IsActive"></label>
-</div>
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+    }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            border-color: #0d6efd;
+        }
+
+    /* Avatar Styling */
+    .avatar-upload-preview {
+        width: 80px;
+        height: 80px;
+    }
+
+    .avatar-placeholder {
+        width: 80px;
+        height: 80px;
+        background-color: #f8f9fa;
+        border: 1px dashed #dee2e6;
+    }
+
+    /* Radio Buttons */
+    .form-check-input {
+        width: 1.2em;
+        height: 1.2em;
+        margin-top: 0.2em;
+    }
+
+    /* Toggle Switch */
+    .form-switch .form-check-input {
+        width: 3em;
+        height: 1.5em;
+    }
+
+    /* Responsive Adjustments */
+    @@media (max-width: 768px) {
+        .avatar-upload-preview {
+            width: 60px;
+            height: 60px;
+        }
+
+        .gender-options {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Preview image when selected
+        document.getElementById('Image').addEventListener('change', function(e) {
+            const preview = document.querySelector('.avatar-upload-preview');
+            const file = e.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img class="rounded-circle shadow-sm" src="${e.target.result}"
+                                          alt="Preview" width="80" height="80" style="object-fit: cover" />`;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}
